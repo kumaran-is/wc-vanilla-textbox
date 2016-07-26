@@ -1,0 +1,52 @@
+<template id="wc-vanilla-textbox">
+    <style>
+         input([is="wc-vanilla-textbox"])  {
+          position : relative;
+          max-width: 530px; 
+          width: 100%;
+          padding: 12px 14px 12px 7px;
+          border: 3px solid green;
+          box-sizing: border-box;
+          border-radius: 6px;
+          line-height: normal;
+          font-family: AvenirLTStd-Roman;
+          font-size::host(x-foo:host)14px; 
+          font-style:normal;
+          font-variant:normal;
+          font-weight:normal;
+          color:rgb(75, 75, 75);
+        }
+    </style>
+</template>
+<script>
+(function() {
+  /*In a native HTML Imports, "document.currentScript.ownerDocument" references the import document itself. In the polyfill use document._currentScript.ownerDocument (note the underscore). 
+  Native HTML Imports is supported only in Chrome browser.  */
+    var template = (document._currentScript || document._currentScript).ownerDocument.querySelector('#wc-vanilla-textbox');
+    // Creates an object based in the HTML Element prototype
+    var element = Object.create(HTMLInputElement.prototype);
+
+    // Fires when an instance of the element is created
+    element.createdCallback = function() {
+      var shadowRoot = this.createShadowRoot();
+      var clone = document.importNode(template.content, true);
+      shadowRoot.appendChild(clone);
+      //this.appendChild(clone);
+    };
+
+    // Fires when an instance was inserted into the document
+    element.attachedCallback = function() {};
+
+    // Fires when an instance was removed from the document
+    element.detachedCallback = function() {};
+
+    // Fires when an attribute was added, removed, or updated
+    element.attributeChangedCallback = function(attr, oldVal, newVal) {};
+
+    // Registers custom element
+    document.registerElement('wc-vanilla-textbox', {
+        prototype: element,
+        extends: 'input'
+    });
+}());
+</script>

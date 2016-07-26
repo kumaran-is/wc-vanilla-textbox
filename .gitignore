@@ -1,0 +1,22 @@
+# Dependency directory
+bower_components/
+
+# Logs
+pids
+logs
+*.pid
+*.log
+
+# Built artifacts
+build
+dist
+
+# Other
+*.seed
+*.csv
+*.dat
+*.out
+.reloadStatic
+
+# Environment-specific configuration - NEVER commit to Git
+.env
